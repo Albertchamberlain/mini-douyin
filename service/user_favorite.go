@@ -23,7 +23,7 @@ func (f *UserFavoriteAction) Action() error {
 	return nil
 }
 
-// 客户端有个bug，未登陆状态下点击喜欢并登陆一个账号（已经喜欢过该视频），会导致显示的喜欢数比实际多1
+// 客户端有个bug，未登陆状态下点击喜欢并登陆一个账号（已经喜欢过该视频），会导致显示的喜欢数比实际多1  //这里应该是客户端设置了默认值导致的
 func (f *UserFavoriteAction) create() error {
 	//uf := model.UserFavorite{
 	//	UserId:     f.UserId,
