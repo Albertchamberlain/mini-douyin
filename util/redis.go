@@ -2,9 +2,10 @@ package util
 
 import (
 	"context"
-	"github.com/go-redis/redis/v8"
 	"strconv"
 	"time"
+
+	"github.com/go-redis/redis/v8"
 )
 
 type redisUtil struct {
@@ -13,6 +14,7 @@ type redisUtil struct {
 }
 
 var Redis *redisUtil
+var RedisClient1 *redis.Client
 
 const (
 	cacheName        = "douyin"
@@ -27,6 +29,7 @@ func InitRedis(options *redis.Options) {
 	Redis = new(redisUtil)
 	Redis.server = redis.NewClient(options)
 	Redis.ctx = context.TODO()
+	RedisClient1 = Redis.server
 	if _, err := Redis.server.Ping(Redis.ctx).Result(); err != nil {
 		panic(err)
 	}
