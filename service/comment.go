@@ -7,12 +7,14 @@ import (
 )
 
 type CommentAction struct {
-	UserId      uint   `form:"user_id" json:"user_id"`
-	Token       string `form:"token" json:"token"`
-	VideoId     uint   `form:"video_id" json:"video_id"`
-	ActionType  int    `form:"action_type" json:"action_type"`
-	CommentText string `form:"comment_text" json:"comment_text;omitempty"`
-	CommentId   uint   `form:"comment_id" json:"comment_id;omitempty"`
+	UserId     uint   `form:"user_id" json:"user_id"`
+	Token      string `form:"token" json:"token"`
+	VideoId    uint   `form:"video_id" json:"video_id"`
+	ActionType int    `form:"action_type" json:"action_type"`
+	// CommentText string `form:"comment_text" json:"comment_text;omitempty"`
+	// CommentId   uint   `form:"comment_id" json:"comment_id;omitempty"`
+	CommentText string `form:"comment_text" json:"comment_text"`
+	CommentId   uint   `form:"comment_id" json:"comment_id"`
 }
 
 func (c *CommentAction) Action() (*model.Comment, error) {
