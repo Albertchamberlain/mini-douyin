@@ -19,9 +19,6 @@
    2. - [x]  关注列表
    3. - [x]  粉丝列表
 
-## 3.额外的底层实现 - III
-   1. - [ ]  引入自实现的搜索引擎   relevant project
-   2. - [ ]  引入自实现的KV存储    relevant project
 
 
 
