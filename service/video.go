@@ -6,11 +6,12 @@ import (
 	"ADDD_DOUYIN/serializer"
 	"errors"
 	"fmt"
-	"gorm.io/gorm"
 	"time"
+
+	"gorm.io/gorm"
 )
 
-type FeedService struct { //TODO 目前用户登录与否都可以返回Feed流，或许以后可以根据用户的特征push一些定制化的Feed流
+type FeedService struct { //TODO 目前用户登录与否都可以返回Feed流，或许以后可以根据用户的特征返回一些定制化的Feed流
 	LatestTime string `json:"latest_time,omitempty"`
 	Token      string `json:"token,omitempty"`
 }
@@ -22,11 +23,9 @@ func Feed(latestTime string) ([]*model.Video, error) {
 	return vs, err
 }
 
-//Feed流服务
 func (service *FeedService) FeedService() serializer.FeedResponse {
-	videoList := make([]*serializer.Video, 30) //定义返回Response中的videoList，且预分配内存
+	videoList := make([]*serializer.Video, 30)
 	if err := conf.DB.Select("*").Order("created_at DESC").Limit(30).Scan(&videoList).Error; err != nil {
-		//如果查询不到，返回相应的错误
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			fmt.Println(err)
 			return serializer.FeedResponse{
@@ -35,7 +34,6 @@ func (service *FeedService) FeedService() serializer.FeedResponse {
 				},
 			}
 		}
-		//数据库出错
 		fmt.Println(err)
 		return serializer.FeedResponse{
 			Response: serializer.Response{StatusCode: 1,
@@ -43,7 +41,6 @@ func (service *FeedService) FeedService() serializer.FeedResponse {
 			},
 		}
 	}
-	//正常返回feed流的业务逻辑
 	return serializer.FeedResponse{
 		Response: serializer.Response{StatusCode: 0,
 			StatusMsg: "feed流返回成功",

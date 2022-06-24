@@ -26,7 +26,7 @@ func Init() {
 		fmt.Println("配置文件读取错误，请检查文件路径:", err)
 		panic(err)
 	}
-	//初始化mysql
+
 	Db = file.Section("mysql").Key("Db").String()
 	DbHost = file.Section("mysql").Key("DbHost").String()
 	DbPort = file.Section("mysql").Key("DbPort").String()
@@ -36,19 +36,17 @@ func Init() {
 	path := strings.Join([]string{DbUser, ":", DbPassWord, "@tcp(", DbHost, ":", DbPort, ")/", DbName, "?charset=utf8&parseTime=true&loc=Local"}, "")
 	Database(path)
 
-	//初始化cos
 	u, _ := url.Parse(file.Section("cos").Key("url").String())
 	b := &cos.BaseURL{BucketURL: u}
 	id := file.Section("cos").Key("id").String()
 	key := file.Section("cos").Key("key").String()
 	util.InitCos(b, id, key)
 
-	// 初始化redis
 	conf := &redis.Options{
 		Addr:     file.Section("redis").Key("url").String(),
 		Password: file.Section("redis").Key("password").String(),
 		DB:       0,
-		PoolSize: 100, //设置Redis连接池大小，100这个数字目前没有数据支撑,随机选的
+		PoolSize: 100,
 	}
 	util.InitRedis(conf)
 }

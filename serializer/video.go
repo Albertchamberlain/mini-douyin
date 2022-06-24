@@ -5,7 +5,6 @@ import (
 	"ADDD_DOUYIN/util"
 )
 
-//序列化的FeedResponse
 type FeedResponse struct {
 	Response
 	VideoList []*Video `json:"video_list,omitempty"`

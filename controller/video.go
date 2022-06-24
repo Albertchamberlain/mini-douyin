@@ -4,10 +4,11 @@ import (
 	"ADDD_DOUYIN/serializer"
 	"ADDD_DOUYIN/service"
 	"ADDD_DOUYIN/util"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 func Feed(c *gin.Context) {
@@ -31,7 +32,7 @@ func Feed(c *gin.Context) {
 		c.JSON(http.StatusOK, serializer.FeedResponse{
 			Response:  serializer.Success,
 			VideoList: serializer.PackVideos(res, userId, check, false),
-			NextTime:  time.Now().Unix(), // fixme 本次最早时间作为下次请求时间？
+			NextTime:  time.Now().Unix() / 1000,
 		})
 	}
 }

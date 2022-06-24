@@ -9,7 +9,6 @@ import (
 	"github.com/robfig/cron"
 )
 
-// Cron 定时器单例
 var Cron *cron.Cron
 
 // Run 运行
@@ -30,9 +29,7 @@ func CronJob() {
 	if Cron == nil {
 		Cron = cron.New()
 	}
-
 	Cron.AddFunc("0 0 0 * * *", func() { Run(RestartDailyRank) })
 	Cron.Start()
-
 	fmt.Println("Cronjob start.....")
 }
