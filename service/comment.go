@@ -4,6 +4,8 @@ import (
 	"ADDD_DOUYIN/conf"
 	"ADDD_DOUYIN/model"
 	"ADDD_DOUYIN/util"
+	"fmt"
+	"runtime"
 )
 
 type CommentAction struct {
@@ -61,5 +63,6 @@ func (c *CommentAction) delete() error {
 func CommentList(videoId string) ([]*model.Comment, error) {
 	comments := make([]*model.Comment, 0)
 	err := conf.DB.Where("video_id = ?", videoId).Preload("User").Find(&comments).Error
+	fmt.Println(runtime.NumGoroutine())
 	return comments, err
 }

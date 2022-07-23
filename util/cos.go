@@ -43,5 +43,4 @@ func UploadVideo(name string, data *multipart.FileHeader, video *model.Video) er
 		video.CoverUrl = baseUrl + "/" + withImgExt
 		return nil
 	}
-
 }

@@ -30,6 +30,7 @@ require (
 	github.com/mozillazg/go-httpheader v0.3.1 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
+	github.com/yudeguang/iox v0.0.0-20180519090448-bffdb29c87c0 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.26.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
@@ -50,6 +51,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/robfig/cron v1.2.0
 	github.com/ugorji/go/codec v1.1.7 // indirect
+	github.com/yudeguang/ratelimit v0.0.0-20220329131452-0804edb8b0fc
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
 	golang.org/x/sys v0.0.0-20220408201424-a24fb2fb8a0f // indirect
 	gopkg.in/ini.v1 v1.66.4
