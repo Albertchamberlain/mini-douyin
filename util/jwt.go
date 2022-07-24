@@ -23,7 +23,7 @@ func GenerateToken(id uint, username string, authority int) (string, error) {
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    "minidouyin",
-			Subject:   "user token",:
+			Subject:   "user token",
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
