@@ -3,7 +3,7 @@ package util
 import (
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt"
 )
 
 var jwtKey = []byte("www.miniDouyin.com")
@@ -17,13 +17,13 @@ type Claims struct {
 
 func GenerateToken(id uint, username string, authority int) (string, error) {
 	expireTime := time.Now().Add(7 * 24 * time.Hour)
-	claims := &Claims{ //TODO 后续可以将token写入Redis并设置过期时间，而不用Web服务器进行设置
+	claims := &Claims{
 		Id:       id,
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    "minidouyin",
-			Subject:   "user token",
+			Subject:   "user token",:
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
