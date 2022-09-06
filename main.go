@@ -4,6 +4,7 @@ import (
 	"ADDD_DOUYIN/conf"
 	"ADDD_DOUYIN/routes"
 	"fmt"
+	_ "net/http/pprof"
 )
 
 func main() {
