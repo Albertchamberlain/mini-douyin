@@ -45,6 +45,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
+	github.com/juju/ratelimit v1.0.2
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/liangyaopei/bloom v0.0.0-20200731105511-80cd5611908c
 	github.com/mattn/go-isatty v0.0.12 // indirect

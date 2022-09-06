@@ -2,7 +2,9 @@ package routes
 
 import (
 	"ADDD_DOUYIN/controller"
+	"ADDD_DOUYIN/middleware"
 	"net/http"
+	"time"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -11,7 +13,9 @@ import (
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
-	r.Use(sessions.Sessions("douyin-session", cookie.NewStore([]byte("secret-about-douyin"))))
+	gin.ForceConsoleColor()
+	r.Use(middleware.RateLimitMiddleware(time.Second, 100, 100), middleware.Cors(), sessions.Sessions("douyin-session", cookie.NewStore([]byte("secret-about-douyin"))))
+
 	apiRouter := r.Group("/douyin")
 	{
 
