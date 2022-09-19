@@ -77,7 +77,7 @@ ALTER TABLE user MODIFY COLUMN name VARCHAR(50) BINARY CHARACTER SET utf8 COLLAT
 
 
 
-**后续的想法**
+**额外的高级功能**
 <!-- 1. - [ ] 退出登录实现(前置条件：用户的Token存入Redis中)  
 用户重新登录以后系统应该把这个用户之前签发的token都清除掉。如下设计：
 redis的key可以是用户的id加上token，如key:"wfwjej24149uwehi3i#1"，（符号#前为token，符号#后为id）这样就可以通过token找id，也可以通过id找到token。
@@ -98,6 +98,7 @@ redis的key可以是用户的id加上token，如key:"wfwjej24149uwehi3i#1"，（
 <!-- 13. - [ ] Test And Set,Compare And Swap！！！ 版本号 -->
 7. - [x] 迁移jwt -> https://github.com/golang-jwt/jwt
 8. - [x] 引入pprof/直接看到当前web服务的状态，包括CPU占用情况和内存使用情况访问http://localhost:8080/debug/pprof/
+9. - [x] 引入Prometheus监控
 
 
 

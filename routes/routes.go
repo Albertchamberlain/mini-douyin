@@ -9,16 +9,16 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 	gin.ForceConsoleColor()
-	r.Use(middleware.RateLimitMiddleware(time.Second, 100, 100), middleware.Cors(), sessions.Sessions("douyin-session", cookie.NewStore([]byte("secret-about-douyin"))))
-
+	r.Use(middleware.MwPrometheusHttp, middleware.RateLimitMiddleware(time.Second, 100, 100), middleware.Cors(), sessions.Sessions("douyin-session", cookie.NewStore([]byte("secret-about-douyin"))))
+	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	apiRouter := r.Group("/douyin")
 	{
-
 		apiRouter.GET("/ping", ping)
 		//   ***************basic apis***************
 
