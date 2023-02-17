@@ -23,7 +23,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/douyin/Feed": {
+        "/feed": {
             "get": {
                 "description": "给游客或者注册用户推送Feeds的接口，一次30条",
                 "produces": [

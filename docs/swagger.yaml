@@ -54,7 +54,7 @@ info:
   title: MiniDouyin 开发文档
   version: "1.0"
 paths:
-  /douyin/Feed:
+  /feed:
     get:
       description: 给游客或者注册用户推送Feeds的接口，一次30条
       parameters:

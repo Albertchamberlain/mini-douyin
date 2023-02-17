@@ -36,7 +36,7 @@ type FeedResponseForSwagger struct {
 // @Tags 用户相关接口
 // @Summary 用户推送Feeds
 // @Description 给游客或者注册用户推送Feeds的接口，一次30条
-// @Router /douyin/Feed [get]
+// @Router /feed [get]
 // @Param latest_time query string false "上次访问时间"
 // @Param token query string  false "token"
 // @Produce json
