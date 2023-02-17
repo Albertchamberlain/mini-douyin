@@ -55,7 +55,7 @@ gin-swagger
 - serializer : 定义序列化json的结构体
 - log : 存放日志文件
 - service : 具体的功能处理逻辑
-- docs : swagger稳当
+- docs : swagger文档
 - util : 工具类
 
 
