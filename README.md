@@ -37,8 +37,10 @@ douyin/
 ├── serializer
 ├── log
 ├── service
+├── docs
 └── util
 ```
+gin-swagger
 
 - conf : 用于存储配置文件
 - controller : 用于处理请求JSON格式返回
@@ -46,10 +48,11 @@ douyin/
 - middleware : 自定义的中间件,支持跨域和限流
 - model : gorm使用的数据库模型
 - routes : 路由转发
-- serializer：定义序列化json的结构体
-- log：存放日志文件
+- serializer : 定义序列化json的结构体
+- log : 存放日志文件
 - service : 具体的功能处理逻辑
-- util：工具类
+- docs : swagger稳当
+- util : 工具类
 
 
 ## 如何运行本项目
@@ -73,7 +76,8 @@ ALTER TABLE user MODIFY COLUMN name VARCHAR(50) BINARY CHARACTER SET utf8 COLLAT
 **4.测试**
 1. 可以使用**postman**对接口进行测试
 ![postman](docs/postman.png)
-1. 也可使用客户端测试
+2. 也可使用客户端测试
+3. Swagger为1.4.3版本，最新版1.5.3不兼容 
 
 
 

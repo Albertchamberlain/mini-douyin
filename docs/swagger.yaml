@@ -1,0 +1,79 @@
+basePath: /douyin
+definitions:
+  controller.FeedResponseForSwagger:
+    properties:
+      next_time:
+        type: integer
+      status_code:
+        type: integer
+      status_msg:
+        type: string
+      video_list:
+        items:
+          properties:
+            author:
+              properties:
+                follow_count:
+                  type: integer
+                follower_count:
+                  type: integer
+                id:
+                  type: integer
+                is_follow:
+                  type: boolean
+                name:
+                  type: string
+              type: object
+            comment_count:
+              type: integer
+            cover_url:
+              type: string
+            favorite_count:
+              type: integer
+            id:
+              type: integer
+            is_favorite:
+              type: boolean
+            play_url:
+              type: string
+            title:
+              type: string
+          type: object
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: albert7king@gmail.com
+    name: API Support
+    url: albertchamberlain.github.io.com
+  description: Golang api for MiniDouyin
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: MiniDouyin 开发文档
+  version: "1.0"
+paths:
+  /douyin/Feed:
+    get:
+      description: 给游客或者注册用户推送Feeds的接口，一次30条
+      parameters:
+      - description: 上次访问时间
+        in: query
+        name: latest_time
+        type: string
+      - description: token
+        in: query
+        name: token
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.FeedResponseForSwagger'
+      summary: 用户推送Feeds
+      tags:
+      - 用户相关接口
+swagger: "2.0"

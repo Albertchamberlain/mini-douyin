@@ -5,9 +5,10 @@ import (
 	"ADDD_DOUYIN/service"
 	"ADDD_DOUYIN/util"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 func RelationAction(ctx *gin.Context) {

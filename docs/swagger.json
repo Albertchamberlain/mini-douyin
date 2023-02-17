@@ -1,0 +1,120 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Golang api for MiniDouyin",
+        "title": "MiniDouyin 开发文档",
+        "contact": {
+            "name": "API Support",
+            "url": "albertchamberlain.github.io.com",
+            "email": "albert7king@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/douyin",
+    "paths": {
+        "/douyin/Feed": {
+            "get": {
+                "description": "给游客或者注册用户推送Feeds的接口，一次30条",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户相关接口"
+                ],
+                "summary": "用户推送Feeds",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "上次访问时间",
+                        "name": "latest_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "token",
+                        "name": "token",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.FeedResponseForSwagger"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controller.FeedResponseForSwagger": {
+            "type": "object",
+            "properties": {
+                "next_time": {
+                    "type": "integer"
+                },
+                "status_code": {
+                    "type": "integer"
+                },
+                "status_msg": {
+                    "type": "string"
+                },
+                "video_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "author": {
+                                "type": "object",
+                                "properties": {
+                                    "follow_count": {
+                                        "type": "integer"
+                                    },
+                                    "follower_count": {
+                                        "type": "integer"
+                                    },
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "is_follow": {
+                                        "type": "boolean"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "comment_count": {
+                                "type": "integer"
+                            },
+                            "cover_url": {
+                                "type": "string"
+                            },
+                            "favorite_count": {
+                                "type": "integer"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "is_favorite": {
+                                "type": "boolean"
+                            },
+                            "play_url": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

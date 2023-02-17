@@ -3,6 +3,7 @@ package serializer
 import (
 	"ADDD_DOUYIN/model"
 	"ADDD_DOUYIN/util"
+	"fmt"
 )
 
 type FeedResponse struct {
@@ -18,7 +19,13 @@ func PackVideo(v *model.Video, userId uint, check, defaultTo bool) *Video {
 
 	favoriteCount, commentCount, isFavorite := int64(0), int64(0), defaultTo
 	favoriteCount, _ = util.Redis.CountLiked(v.ID)
-	commentCount, _ = util.Redis.CountComment(v.ID)
+	commentCountInterface, _ := util.Redis.CountComment(v.ID)
+	switch commentCountInterface.(type) {
+	case int64:
+		commentCount, _ = commentCountInterface.(int64)
+	default:
+		fmt.Println("assert fail")
+	}
 	if check {
 		isFavorite, _ = util.Redis.IsLike(v.ID, userId)
 	}

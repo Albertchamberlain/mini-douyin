@@ -6,24 +6,19 @@ import (
 	"time"
 
 	"github.com/go-redis/redis/v8"
+	"golang.org/x/sync/singleflight"
 )
 
 type redisUtil struct {
-	server *redis.Client
-	ctx    context.Context
+	server       *redis.Client
+	ctx          context.Context
+	requestGroup singleflight.Group
+	// singleflight类的使用方法就新建一个singleflight.Group，使用其方法Do或者DoChan来包装方法，
+	// 被包装的方法在对于同一个key，只会有一个协程执行，其他协程等待那个协程执行结束后，拿到同样的结果。
 }
 
 var Redis *redisUtil
 var RedisClient1 *redis.Client
-
-const (
-	cacheName        = "douyin"
-	userLikeDomain   = "user_like"
-	videoLikedDomain = "video_like"
-	followerDomain   = "follower"
-	followeeDomain   = "followee"
-	commentDomain    = "comment"
-)
 
 func InitRedis(options *redis.Options) {
 	Redis = new(redisUtil)
@@ -138,8 +133,14 @@ func (r *redisUtil) DecrComment(id uint) error {
 	return r.server.Decr(r.ctx, commentKey(id)).Err()
 }
 
-func (r *redisUtil) CountComment(id uint) (int64, error) {
-	return r.server.Get(r.ctx, commentKey(id)).Int64()
+func (r *redisUtil) CountComment(id uint) (interface{}, error) {
+	v, err, _ := r.requestGroup.Do(string(rune(id)), func() (interface{}, error) {
+		return r.server.Get(r.ctx, commentKey(id)).Int64()
+	})
+	if err != nil {
+		return v, err
+	}
+	return v, err
 }
 
 func newZWithNowTime(member interface{}) *redis.Z {
@@ -148,6 +149,15 @@ func newZWithNowTime(member interface{}) *redis.Z {
 		Member: member,
 	}
 }
+
+const (
+	cacheName        = "douyin"
+	userLikeDomain   = "user_like"
+	videoLikedDomain = "video_like"
+	followerDomain   = "follower"
+	followeeDomain   = "followee"
+	commentDomain    = "comment"
+)
 
 func videoLikedKey(videoId uint) string {
 	return cacheName + ":" + videoLikedDomain + ":" + strconv.FormatUint(uint64(videoId), 10)
